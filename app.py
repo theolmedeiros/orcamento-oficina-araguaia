@@ -103,7 +103,7 @@ for i in range(int(qtd_itens)):
     desc = st.text_input(f"Descrição do item {i+1}", key=f"desc_{i}")
     qtd = st.number_input(f"Quantidade do item {i+1}", min_value=1, key=f"qtd_{i}")
     valor = st.number_input(f"Valor unitário do item {i+1} (R$)", min_value=0.0, step=0.01, key=f"valor_{i}")
-    itens.append({"descricao": desc, "quantidade": qtd, "valor": valor}
+    itens.append({"descricao": desc, "quantidade": qtd, "valor": valor})
 
     desconto = st.number_input("Desconto (R$)", min_value=0.0, step=0.01)
     observacoes = st.text_area("Observações")
