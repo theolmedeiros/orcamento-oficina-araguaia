@@ -104,4 +104,21 @@ with st.form("form_orcamento"):
     observacoes = st.text_area("Observações")
     numero = st.text_input("Número do Orçamento")
 
-    gerar
+    # AQUI ESTÁ O BOTÃO CORRETAMENTE DENTRO DO FORM
+    gerar = st.form_submit_button("Gerar PDF")
+
+# E AGORA A LÓGICA DEPOIS DO FORM
+if gerar:
+    dados = {
+        "Cliente": nome,
+        "Telefone": telefone,
+        "Endereço": endereco,
+        "Veículo": veiculo,
+        "Placa": placa,
+        "Chassi": chassi,
+        "Cor": cor
+    }
+    caminho = gerar_orcamento_pdf(dados, itens, desconto, observacoes, numero)
+    st.success("PDF gerado com sucesso!")
+    with open(caminho, "rb") as file:
+        st.download_button("📥 Baixar PDF", file, file_name=caminho)
