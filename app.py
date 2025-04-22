@@ -4,7 +4,7 @@ from datetime import datetime
 
 class OrcamentoPDF(FPDF):
     def header(self):
-        self.image("logo_araguaia.png", 10, 8, 33)  # logo deve estar na mesma pasta
+        self.image("logo_araguaia.png", 10, 8, 33)
         self.set_font("Arial", "B", 14)
         self.cell(0, 10, "OFICINA ARAGUAIA - ORÇAMENTO DE SERVIÇOS", ln=True, align="C")
         self.ln(10)
@@ -76,7 +76,6 @@ def gerar_orcamento_pdf(dados_cliente, itens, desconto, observacoes, numero):
     pdf.output(nome_arquivo)
     return nome_arquivo
 
-# Streamlit UI
 st.set_page_config(page_title="Gerador de Orçamentos - Oficina Araguaia")
 st.title("📄 Gerador de Orçamentos - Oficina Araguaia")
 
@@ -91,12 +90,11 @@ with st.form("form_orcamento"):
     cor = st.text_input("Cor")
 
     st.subheader("Itens do Orçamento")
-
     qtd_itens = st.number_input("Quantos itens deseja inserir?", min_value=1, step=1)
 
     itens = []
     for i in range(int(qtd_itens)):
-        st.markdown(f"*Item {i+1}*")
+        st.markdown(f"**Item {i+1}**")
         desc = st.text_input(f"Descrição do item {i+1}", key=f"desc_{i}")
         qtd = st.number_input(f"Quantidade do item {i+1}", min_value=1, key=f"qtd_{i}")
         valor = st.number_input(f"Valor unitário do item {i+1} (R$)", min_value=0.0, step=0.01, key=f"valor_{i}")
