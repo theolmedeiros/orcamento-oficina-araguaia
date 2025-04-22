@@ -90,15 +90,20 @@ with st.form("form_orcamento"):
     chassi = st.text_input("Chassi")
     cor = st.text_input("Cor")
 
-    st.subheader("Itens do Orçamento")
-    qtd_itens = st.number_input("Quantos itens deseja inserir?", min_value=1, step=1)
-    itens = []
-    for i in range(int(qtd_itens)):
-        st.markdown(f"*Item {i+1}*")
-        desc = st.text_input(f"Descrição {i+1}", key=f"desc_{i}")
-        qtd = st.number_input(f"Quantidade {i+1}", min_value=1, key=f"qtd_{i}")
-        valor = st.number_input(f"Valor Unitário {i+1} (R$)", min_value=0.0, step=0.01, key=f"val_{i}")
-        itens.append({"descricao": desc, "quantidade": qtd, "valor": valor})
+st.subheader("Itens do Orçamento")
+
+if "qtd_itens" not in st.session_state:
+    st.session_state.qtd_itens = 1
+
+qtd_itens = st.number_input("Quantos itens deseja inserir?", min_value=1, step=1, key="qtd_itens")
+
+itens = []
+for i in range(int(qtd_itens)):
+    st.markdown(f"*Item {i+1}*")
+    desc = st.text_input(f"Descrição do item {i+1}", key=f"desc_{i}")
+    qtd = st.number_input(f"Quantidade do item {i+1}", min_value=1, key=f"qtd_{i}")
+    valor = st.number_input(f"Valor unitário do item {i+1} (R$)", min_value=0.0, step=0.01, key=f"valor_{i}")
+    itens.append({"descricao": desc, "quantidade": qtd, "valor": valor}
 
     desconto = st.number_input("Desconto (R$)", min_value=0.0, step=0.01)
     observacoes = st.text_area("Observações")
